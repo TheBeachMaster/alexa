@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Alexa Login</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+    <div id="amazon-root"></div>
+    <script type="text/javascript">
+        window.onAmazonLoginReady = function() {
+            amazon.Login.setClientId('amzn1.devportal.webapp.45606d905a5741c48885b7cd771202e1');
+        };
+        (function(d) {
+            var a = d.createElement('script');
+            a.type = 'text/javascript';
+            a.async = true;
+            a.id = 'amazon-login-sdk';
+            a.src = 'https://api-cdn.amazon.com/sdk/login1.js';
+            d.getElementById('amazon-root').appendChild(a);
+        })(document);
+    </script>
+    <div>
+        Login with your Amazon Account to continue
+    </div>
+    <div>
+        <p>
+            <a href="#" id="LoginWithAmazon">
+                <img border="0" alt="Login with Amazon" src="https://images-na.ssl-images-amazon.com/images/G/01/lwa/btnLWA_gold_156x32.png" width="156" height="32" />
+            </a>
+        </p>
+    </div>
+    <script type="text/javascript">
+        document.getElementById('LoginWithAmazon').onclick = function() {
+            options = {
+                scope: 'profile'
+            };
+            amazon.Login.authorize(options, 'https://thebeachmaster.github.io/alexa/handle_login.php');
+            return false;
+        };
+    </script>
+
+</body>
+
+</html>
