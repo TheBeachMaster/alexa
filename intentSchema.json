@@ -1,0 +1,16 @@
+{
+    "intents": [{
+            "intent": "GetData"
+        },
+        {
+            "intent": "SendCommands"
+        },
+        {
+            "intent": "GetDataAtTime",
+            "slots": [{
+                "name": "TimeSlot",
+                "type": "AMAZON.TIME"
+            }]
+        }
+    ]
+}
