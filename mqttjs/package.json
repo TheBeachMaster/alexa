@@ -23,5 +23,8 @@
     "bugs": {
         "url": "https://github.com/TheBeachMaster/alexa/issues"
     },
-    "homepage": "https://github.com/TheBeachMaster/alexa#readme"
+    "homepage": "https://github.com/TheBeachMaster/alexa#readme",
+    "dependencies": {
+        "mqtt": "^2.11.0"
+    }
 }
