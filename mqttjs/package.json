@@ -1,0 +1,27 @@
+{
+    "name": "alexamqtt",
+    "version": "1.0.0",
+    "description": "Alexa MQTT",
+    "main": "app.js",
+    "scripts": {
+        "start": "node app.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/TheBeachMaster/alexa.git"
+    },
+    "keywords": [
+        "Alexa",
+        "alexa",
+        "mqtt",
+        "mosquitto",
+        "mqtt.js"
+    ],
+    "author": "Arthur Kennedy Otieno",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/TheBeachMaster/alexa/issues"
+    },
+    "homepage": "https://github.com/TheBeachMaster/alexa#readme"
+}
