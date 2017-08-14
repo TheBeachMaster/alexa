@@ -3,14 +3,13 @@
             "intent": "GetData"
         },
         {
-            "intent": "SendCommands"
+            "intent": "SwitchOff"
         },
         {
-            "intent": "GetDataAtTime",
-            "slots": [{
-                "name": "TimeSlot",
-                "type": "AMAZON.TIME"
-            }]
+            "intent": "SwitchOn"
+        },
+        {
+            "intent": "DoStuff"
         }
     ]
 }
