@@ -1,6 +1,6 @@
 /*
  Name:		CC3000PubSub.ino
- Created:	7/26/2017 10:43:00
+ Created:	08/14/2017 10:43:00
  Author:	Kennedy Otieno
 */
 
@@ -8,7 +8,6 @@
 #include <SPI.h>
 #include <ccspi.h>
 #include <Adafruit_CC3000.h>
-//#include <WiFi.h>
 
 //Network Settings
 #define WLAN_SSID "Lenovo A7010"
@@ -21,6 +20,7 @@
 #define ADAFRUIT_CC3000_CS 10
 
 #define LEDPIN 5
+#define SENSORPIN A0
 
 //Create a CC3000 Instance -< For connections
 Adafruit_CC3000 cc3000 = Adafruit_CC3000(ADAFRUIT_CC3000_CS, ADAFRUIT_CC3000_IRQ, ADAFRUIT_CC3000_VBAT, SPI_CLOCK_DIVIDER);
@@ -31,18 +31,22 @@ Adafruit_CC3000_Client cc_client = Adafruit_CC3000_Client();
 long lastMsg = 0;
 char msg[50];
 int value = 0;
-//const char* broker = "broker.mqtt-dashboard.com";
 const char* broker = "sungura1-angani-ke-host.africastalking.com";
+float data = analogRead(SENSORPIN);
 
 PubSubClient client(broker,1883,callback,cc_client);
 
 void setup() {
+	pinMode(LEDPIN,OUTPUT);
+	pinMode(SENSORPIN,INPUT);
+	digitalWrite(LEDPIN,HIGH);
 	Serial.begin(9600);
 	while (!Serial) {
-		; // wait for serial port to connect. Needed for native USB port only
+		; // wait for serial port to connect. 
 	}
 	connectCC300();
 	displayConnectionDetails();
+	digitalWrite(LEDPIN,LOW);
 
 }
 void loop() {
@@ -160,7 +164,8 @@ void _keepAlive() {
 		Serial.println();
 		if (client.connect("Alexa")) {
 			Serial.println("connected");
-			client.publish("alexa/pub", "Data1");
+			//client.publish("alexa", "Am Alive");
+			client.publish("alexa",data);
 			client.subscribe("alexa");
 		}
 		else {
