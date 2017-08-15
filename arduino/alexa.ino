@@ -19,7 +19,7 @@
 #define ADAFRUIT_CC3000_IRQ 3
 #define ADAFRUIT_CC3000_CS 10
 
-#define LEDPIN 5
+#define LEDPIN 7
 #define SENSORPIN A0
 
 //Create a CC3000 Instance -< For connections
@@ -33,6 +33,10 @@ char msg[50];
 int value = 0;
 const char* broker = "sungura1-angani-ke-host.africastalking.com";
 float data = analogRead(SENSORPIN);
+
+
+// Callback function header
+void callback(char* topic, byte* payload, unsigned int length);
 
 PubSubClient client(broker,1883,callback,cc_client);
 
@@ -68,10 +72,10 @@ void loop() {
 	if (now - lastMsg > 2000) {
 		lastMsg = now;
 		++value;
-		snprintf(msg, 75, "hello world #%ld", value);
+		dtostrf(data,6,2,msg);
 		Serial.print("Publish message: ");
 		Serial.println(msg);
-		client.publish("outTopic", msg);
+		client.publish("alexa", msg);
 	}
 }
 
@@ -150,7 +154,9 @@ void callback(char* topic, byte* payload, unsigned int length) {
 		digitalWrite(LEDPIN, LOW);   
 	}
 	else {
-		digitalWrite(BUILTIN_LED, HIGH);  // Turn the LED off by making the voltage HIGH
+		// digitalWrite(LEDPIN, HIGH);  // Turn the LED off by making the voltage HIGH
+		// delay(500);
+		digitalWrite(LEDPIN, LOW);
 	}
 
 }
@@ -164,8 +170,7 @@ void _keepAlive() {
 		Serial.println();
 		if (client.connect("Alexa")) {
 			Serial.println("connected");
-			//client.publish("alexa", "Am Alive");
-			client.publish("alexa",data);
+			client.publish("alexa","Am Alive");
 			client.subscribe("alexa");
 		}
 		else {
