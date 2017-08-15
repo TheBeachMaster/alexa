@@ -146,11 +146,9 @@ void callback(char* topic, byte* payload, unsigned int length) {
 		Serial.print((char)payload[i]);
 	}
 	Serial.println();
-
-//	Switch on the LED if an 1 was received as first character
-	if ((char)payload[0] == 'ON') {
+	if ((String)(char *)payload == 'ON') {
 		digitalWrite(LEDPIN, HIGH);  
-	}else if ((char)payload[0] == 'OFF') {
+	}else if ((String)(char *)payload == 'OFF') {
 		digitalWrite(LEDPIN, LOW);   
 	}
 	else {
