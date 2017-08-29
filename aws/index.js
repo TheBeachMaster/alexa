@@ -37,16 +37,18 @@ exports.handler = (event, context) => {
                         client.on('connect', function() {
 
                             client.publish('alexa', 'OFF')
+                            context.succeed(
+                                generateResponse(
+                                    buildSpeechletResponse(`Switching Off Lights`, true), {}
+                                )
+                            )
                         })
+
 
                         client.on('message', function(topic, message) {
                             // message is Buffer
                             console.log(message.toString())
-                            context.succeed(
-                                generateResponse(
-                                    buildSpeechletResponse(`Sent the command to switch off the lights`, true), {}
-                                )
-                            )
+
                             client.end()
                         })
                         break;
@@ -55,34 +57,38 @@ exports.handler = (event, context) => {
                         client.on('connect', function() {
 
                             client.publish('alexa', 'OFF')
+                            context.succeed(
+                                generateResponse(
+                                    buildSpeechletResponse(`Switching On Lights`, true), {}
+                                )
+                            )
                         })
 
                         client.on('message', function(topic, message) {
                             // message is Buffer
                             console.log(message.toString())
-                            context.succeed(
-                                generateResponse(
-                                    buildSpeechletResponse(`Sent the command to switch on the lights`, true), {}
-                                )
-                            )
+
                             client.end()
                         })
                         break;
-                    case "DoStuff":
+                    case "Blink":
 
                         client.on('connect', function() {
 
                             client.publish('alexa', 'BLINK')
+                            context.succeed(
+                                generateResponse(
+                                    buildSpeechletResponse(`Blinking Lights`, true), {}
+                                )
+                            )
                         })
+
+
 
                         client.on('message', function(topic, message) {
                             // message is Buffer
                             console.log(message.toString())
-                            context.succeed(
-                                generateResponse(
-                                    buildSpeechletResponse(`Sent the command to blink the lights`, true), {}
-                                )
-                            )
+
                             client.end()
                         })
                         break;

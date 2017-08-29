@@ -1,0 +1,17 @@
+GetData get the current sensor reading
+GetData what is the light intensity
+GetData readings
+GetData get me the latest data 
+
+SwitchOff switch off lights
+SwitchOff off
+SwitchOff lights out
+SwitchOff lights off 
+
+SwitchOn lights on
+SwitchOn on
+SwitchOn switch on lights
+SwitchOn lights
+
+Blink Blink
+Blink blink lights

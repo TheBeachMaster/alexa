@@ -9,7 +9,7 @@
             "intent": "SwitchOn"
         },
         {
-            "intent": "DoStuff"
+            "intent": "Blink"
         }
     ]
 }

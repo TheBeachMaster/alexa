@@ -25,6 +25,7 @@ exports.handler = (event, context) => {
                         client.on('message', function(topic, message) {
                             // message is Buffer
                             console.log(message.toString())
+                            msg = message.toString();
                             context.succeed(
                                 generateResponse(
                                     buildSpeechletResponse(`New Sensor Data is ${message.toString()}`, true), {}
