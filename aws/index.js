@@ -1,5 +1,10 @@
 var mqtt = require('mqtt')
-var client = mqtt.connect('mqtt://sungura1-angani-ke-host.africastalking.com')
+var conOpts = {
+    username: "alexa",
+    password: "alexa"
+}
+var client = mqtt.connect('mqtt://sungura1-angani-ke-host.africastalking.com:1882', conOpts)
+var msg;
 exports.handler = (event, context) => {
     try {
         if (event.session.new) {
@@ -10,7 +15,7 @@ exports.handler = (event, context) => {
             case "LaunchRequest":
                 console.log('Launch Request');
                 context.succeed(
-                    buildSpeechletResponse('Welcome to Alexa Smart IOT Skill.This skill sends commands to and receives commands from an MQTT Broker ', true), {}
+                    buildSpeechletResponse('Hey there,am Alexa Smart IOT service.I can send commands and receive reding to a connected device', true), {}
                 )
                 break;
             case "IntentRequest":
@@ -18,16 +23,17 @@ exports.handler = (event, context) => {
                 switch (event.request.intent.name) {
                     case "GetData":
                         client.on('connect', function() {
-                            client.subscribe('alexa')
+                            client.subscribe('alexa/sensor/value')
 
                         })
 
                         client.on('message', function(topic, message) {
                             // message is Buffer
                             console.log(message.toString())
+                            msg = message.toString();
                             context.succeed(
                                 generateResponse(
-                                    buildSpeechletResponse(`New Sensor Data is ${message.toString()}`, true), {}
+                                    buildSpeechletResponse('New Sensor Data is' + msg, true), {}
                                 )
                             )
                             client.end()
@@ -36,10 +42,10 @@ exports.handler = (event, context) => {
                     case "SwitchOff":
                         client.on('connect', function() {
 
-                            client.publish('alexa', 'OFF')
+                            client.publish('alexa/commands/client', 'OFF')
                             context.succeed(
                                 generateResponse(
-                                    buildSpeechletResponse(`Switching Off Lights`, true), {}
+                                    buildSpeechletResponse('Switching Off Lights', true), {}
                                 )
                             )
                         })
@@ -48,18 +54,18 @@ exports.handler = (event, context) => {
                         client.on('message', function(topic, message) {
                             // message is Buffer
                             console.log(message.toString())
-
                             client.end()
+
                         })
                         break;
                     case "SwitchOn":
 
                         client.on('connect', function() {
 
-                            client.publish('alexa', 'OFF')
+                            client.publish('alexa/commands/client', 'ON')
                             context.succeed(
                                 generateResponse(
-                                    buildSpeechletResponse(`Switching On Lights`, true), {}
+                                    buildSpeechletResponse('Switching On Lights', true), {}
                                 )
                             )
                         })
@@ -75,10 +81,10 @@ exports.handler = (event, context) => {
 
                         client.on('connect', function() {
 
-                            client.publish('alexa', 'BLINK')
+                            client.publish('alexa/commands/client', 'BLINK')
                             context.succeed(
                                 generateResponse(
-                                    buildSpeechletResponse(`Blinking Lights`, true), {}
+                                    buildSpeechletResponse('Blinking Lights', true), {}
                                 )
                             )
                         })
