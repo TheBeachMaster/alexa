@@ -1,0 +1,25 @@
+{
+  "name": "alexa",
+  "version": "1.0.0",
+  "description": "Alexa MQTT Application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TheBeachMaster/alexa.git"
+  },
+  "keywords": [
+    "Alexa",
+    "MQTT",
+    "Arduino",
+    "Mosquitto"
+  ],
+  "author": "TheBeachmaster",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TheBeachMaster/alexa/issues"
+  },
+  "homepage": "https://github.com/TheBeachMaster/alexa#readme"
+}
